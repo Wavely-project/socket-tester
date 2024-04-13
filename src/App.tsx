@@ -1,21 +1,11 @@
 import { useState } from 'react'
-import {io } from 'socket.io-client'
 import './App.css'
 
-function App() {
+function App(props: any) {
   const [event, setEvent] = useState<string>('');
   const [request, setRequest] = useState<string>('');
-  const socket = io('http://localhost:8080');
 
-  socket.on('connect', () => {
-    console.log('ws connected');
-  });
-
-socket.on('connect_error', (err) => {
-  console.log(err instanceof Error); // true
-  console.log(err.message); // not authorized
-});
-
+  const socket = props.socket;
   const sendEvent = () => {
     socket.emit(event, request);
   };
@@ -27,12 +17,14 @@ socket.on('connect_error', (err) => {
           type="text"
           value={event}
           onChange={(e) => setEvent(e.target.value)}
+          placeholder='Event name'
           style={{ fontSize: '20px', padding: '10px' }}
         />
 
         <input
           type="text"
           value={request}
+          placeholder='Data'
           onChange={(e) => setRequest(e.target.value)}
           style={{ fontSize: '20px', padding: '10px' }}
         />
