@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# simple UI to test our sockets
 
 - `git clone whatever`.
 - `npm install`.
